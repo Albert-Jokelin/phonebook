@@ -12,7 +12,7 @@ export function insertData(callback){
     db.collection("phoneBookContacts").add(contact)
   })
 
-  getData
+  // getData
 }
 
 
