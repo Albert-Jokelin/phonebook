@@ -1,10 +1,10 @@
 import React, { useState } from "react"
-import { NextUIProvider, Text, Table, Button, Grid, Modal } from "@nextui-org/react"
+import { NextUIProvider, Text, Textarea, Table, Button, Grid, Modal } from "@nextui-org/react"
 import Contacts from "../phoneContacts"
 
 var visibility = []
 for (var i = 0; i < Contacts.length; i++) {
-  visibility[i] = false;
+  visibility.push(false);
 }
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
   }
   function handleClick(index) {
     visibility[index] = true;
-    console.log("Visibility index Handle Click: ", visibility[index])
+    console.log("Visibility index Handle Click: ", index, " ", visibility[index])
     setVisibleModal(!visibleModal)
     console.log("Handle click")
   }
@@ -69,17 +69,28 @@ export default function Home() {
                         {contact["firstName"] + " " + contact["lastName"]}
                       </Grid>
                       <Grid>
-                        <Button ghost flat size="sm" css={{ marginRight: "0px", marginLeft: "auto" }} onClick={handleClick}>
+                        <Button ghost flat size="sm" css={{ marginRight: "0px", marginLeft: "auto" }} onClick={() => handleClick(index)}>
                           Details
                         </Button>
                       </Grid>
                       <Modal
                         closeButton
                         aria-labelledby="modal-title"
-                        open={checkVisibility(contact["index"])}
+                        open={checkVisibility(index)}
                         onClose={closeHandler}
                       >
-                        This is the Modal
+                        <Text h3>
+                          Contact card
+                        </Text>
+                         <Textarea
+                          label="First Name"
+                          initialValue={contact["firstName"]} />
+                        {/*<Textarea
+                          label="Last Name"
+                          initialValue={contact["lastName"]} />
+                        <Textarea
+                          label="Phone Number"
+                          initialValue={contact["phoneNumber"]} /> */}
                       </Modal>
                     </Grid.Container>
                   </Table.Cell>
